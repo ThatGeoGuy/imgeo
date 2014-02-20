@@ -1,0 +1,9 @@
+{{! 
+	This file basically splits up which page should be which. Unfortunately,
+	it is not possible to reference this through code, because of how mustache
+	works. Thus, each page will likely have to be referenced here, as well as
+	in our request handlers (routes/) and the server listing (server.js)
+}}
+{{#pageIndex}}
+{{> index}}
+{{/pageIndex}}

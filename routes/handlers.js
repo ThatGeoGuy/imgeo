@@ -6,9 +6,19 @@
  * Description : Implements the request handlers for each page on the server
  */
 
+authors = [ 
+	{ "name": "Jeremy Steward" },
+	{ "name": "Laura Norman" }
+]
+
 module.exports = { 
 	// Index function for root of site
 	index : function(req, res) {
-		res.render('index', { "title": "THIS IS A TITLE", });
+		template = {
+			"description": "Homepage for the IMGEO website",
+			"authors": authors,
+			"pageIndex": true
+		};
+		res.render('base', template);
 	}
 }
