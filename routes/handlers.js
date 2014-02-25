@@ -17,8 +17,8 @@ module.exports = {
 		template = {
 			"description": "Homepage for the IMGEO website",
 			"authors": authors,
-			"pageIndex": true
+			"index": true, 
 		};
-		res.render('base', template);
+		res.render('index.html', template);
 	}
 }
