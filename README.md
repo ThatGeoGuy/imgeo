@@ -1,7 +1,7 @@
 imgeo
 =====
 
-Image sharing service that supports spatial queries. This project spawned as the result of an assignment for the course ENGO 551 - Advanced GIS. The purpose is for users to anonymously (no user authentication) upload imagery with location information to the system, and share these images with others via popular social networks (e.g. Facebook, Twitter, Google+). The server is implemented in node.js, using the Express.js framework. 
+Image sharing service that supports spatial queries. This project spawned as the result of an assignment for the course ENGO 551 - Advanced GIS. The purpose is for users to anonymously (no user authentication) upload imagery with location information to the system, and share these images with others via popular social networks (e.g. Facebook, Twitter, Google+). The server is implemented in node.js, using the Express.js framework. Nunjucks-based templating is used to derive dynamic content from the server. 
 
 Run Server
 ----------
