@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Upload Page</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta name='description' content='{{description}}'>
+		<meta name='author' content='{{name}}'>
+		<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css' />
+		<link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css'>
+		<link rel='stylesheet' href='css/base_upload.css'>
+		
+	</head>
+	
+	<body>
+		<div class='navbar navbar-inverse navbar-static-top' role='navigation'>
+			<div class='container'> 
+				<div class='navbar-header'>
+					<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+						<span class='sr-only'>Toggle navigation</span>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+					</button>
+					<strong><a class='navbar-brand' href='/'>IMGEO</a></strong>
+				</div>
+				<div class='navbar-collapse collapse'>
+					<ul class='nav navbar-nav navbar-right'>
+						{{#pageIndex}}
+						<li><a href='/#about'><i class='glyphicon glyphicon-eye-open glyphicon-white'></i> About</a></li>
+						{{/pageIndex}}
+						<li><a href='/upload'><i class='glyphicon glyphicon-upload glyphicon-white'></i> Upload</a></li>
+					</ul>
+					{{^pageIndex}}
+					<form id='search-form' class='navbar-form navbar-right' role='search' method='get'>
+						<span class='input-group'>
+							<input id='search-input' name='search' type='search' class='form-control' required placeholder='Search...' />
+							<span class='input-group-btn'>
+								<button type='submit' class='btn btn-primary'>
+									<i class='glyphicon glyphicon-search'></i>
+								</button>
+							</span>
+						</span>
+					</form>
+					{{/pageIndex}}
+				</div>
+			</div>
+		</div>
+
+				
+		<div class='container'>
+			<div class = "mc" id = 'map-canvas' ></div>
+			<div class = 'upload_form'>
+				<form role="form">
+				  <div class="form-group">
+					<label for="imgname1">Image Name</label>
+					<input type="name" class="form-control" id="imgname1" placeholder="Enter name">
+				  </div>
+				  <div class="form-group">
+					<label for="locnam1">Location</label>
+					<input type="location" class="form-control" id="locname1" placeholder="location">
+				  </div>
+				   <div class="checkbox">
+					<label>
+					  <input type="checkbox"> Use Browse
+					</label>
+				  </div>
+				  <div class="form-group">
+					<label for="exampleInputFile">Image input</label>
+					<input type="file" id="exampleInputFile">
+					<p class="help-block">image.jpg</p>
+				  </div>
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>	
+				</div>
+		</div>
+
+		
+	
+		<div id='footer'>
+			<div class='navbar navbar-inverse navbar-fixed-bottom' role='navigation'>
+		</div>
+		
+		<script src='https://code.jquery.com/jquery-2.1.0.min.js'></script>
+		<script src='https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js'></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script src='js/js_upload.js'></script>
+	</body>
+</html>
