@@ -11,14 +11,13 @@ authors = [
 	{ "name": "Laura Norman" }
 ]
 
-module.exports = { 
-	// Index function for root of site
-	index : function(req, res) {
+module.exports = function(app) { 
+	app.get('/', function(req, res) {
 		template = {
 			"description": "Homepage for the IMGEO website",
 			"authors": authors,
 			"index": true, 
 		};
 		res.render('index.html', template);
-	}
+	}); 
 }
