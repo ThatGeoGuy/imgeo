@@ -5,11 +5,11 @@
  * Date        : 2014-02-14 @ 11:14:35
  * Description : Implements the webserver for the ENGO500 project website
  */
-var express  = require('express'),
-	handlers = require('./routes/handlers'),
-	nunjucks = require('nunjucks'),
-	http     = require('http'),
-	path     = require('path');
+var express     = require('express'),
+	getHandlers = require('./routes/getHandlers'),
+	nunjucks    = require('nunjucks'),
+	http        = require('http'),
+	path        = require('path');
 
 var app = express();
 app.set('port', process.env.PORT || 8000);
@@ -33,14 +33,22 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+// development only
 if(app.get('env') === 'development') { 
 	app.use(express.errorHandler());
 }
 
-// index of site / registration of urls
-app.get('/', handlers.index);
+/*
+ * Define GET routes and handlers for application
+ */
+getHandlers(app); 
+
+/*
+ * Define POST routes and handlers for application
+ */
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){
-	console.log('Listening on port ' + app.get('port') + '. Go to http://127.0.0.1:' + app.get('port') + '/');
+	console.log('Listening on port ' + app.get('port') + 
+		'. Go to http://127.0.0.1:' + app.get('port') + '/');
 });
