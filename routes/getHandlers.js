@@ -13,11 +13,20 @@ authors = [
 
 module.exports = function(app) { 
 	app.get('/', function(req, res) {
-		template = {
-			"description": "Homepage for the IMGEO website",
-			"authors": authors,
-			"index": true, 
+		templateParameters = {
+			"description" : "Homepage for the IMGEO website",
+			"authors"     : authors,
+			"index"       : true,
 		};
-		res.render('index.html', template);
+		res.render('index.html', templateParameters);
 	}); 
+
+	app.get('/upload', function(req, res) { 
+		templateParameters = { 
+			"description" : "Upload your images to the IMGEO service!",
+			"authors"     : authors,
+			"upload"      : true,
+		};
+		res.render('upload.html', templateParameters);
+	});
 }
