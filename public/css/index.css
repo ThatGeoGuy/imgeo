@@ -1,0 +1,21 @@
+/* --- CONTENT STYLES --- */
+
+#map-canvas { 
+	width: 640px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1.0em;
+}
+
+#map-canvas img { max-width: none; }
+#map-canvas label { width: auto; display: inline; }
+
+form#search-form {
+	width: 65%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 1.0em;
+}
+
+/* --- END CONTENT STYLE --- */
