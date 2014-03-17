@@ -6,10 +6,22 @@
  * Description : Implements the request handlers for each page on the server
  */
 
-authors = [ 
+var url = require("url"),
+	fs  = require("fs");
+
+var authors = [ 
 	{ "name": "Jeremy Steward" },
 	{ "name": "Laura Norman" }
-]
+];
+
+imageExtensions = [
+	".jpg",
+	".jpeg",
+	".png",
+	".gif",
+	".tif",
+	".tiff"
+];
 
 module.exports = function(app) { 
 	app.get('/', function(req, res) {
@@ -28,5 +40,32 @@ module.exports = function(app) {
 			"upload"      : true,
 		};
 		res.render('upload.html', templateParameters);
+	});
+
+	app.get('/image/*', function(req, res) {
+		var path = url.parse(req.url).pathname; 
+		path = path.split('/').filter(function(e) { 
+			return e.length > 0; 
+		});
+		path.slice(1);
+
+		var imageString = false; 
+		for(var i = 0; i < imageExtensions.length; ++i) {
+			if(path[1].slice(path[1].length - 4) === imageExtensions[i]) {
+				imageString = "/img/" + path[1]; 
+			}
+		}
+
+		if(imageString && fs.existsSync("public" + imageString)) { 
+			templateParameters = { 
+				"description": "Image result - " + imageString,
+				"authors" : authors, 
+				"imageUrl" : imageString,
+				"pageUrl": app.get('FQDN') + req.originalUrl
+			}
+			res.render('imageView.html', templateParameters);
+		} else { 
+			res.send(404);
+		}
 	});
 }

@@ -1,9 +1,9 @@
 /*
- * imgeo Search Functionality
- * File:         js_upload.js
+ * IMGEO Upload page javascript file
+ * File:         upload.js
  * Author:       Laura Norman
  * Date:         2014-03-04
- * Description:  
+ * Description:  Renders the map on the upload page. 
  */
 
 $(document).ready(function() {

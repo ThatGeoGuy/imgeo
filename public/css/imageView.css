@@ -1,0 +1,15 @@
+/* --- CONTENT STYLES --- */
+#map-canvas {
+	width: 350px;
+	height: 280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.image{
+	width: 100%; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* --- END CONTENT STYLES --- */
