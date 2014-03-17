@@ -6,10 +6,7 @@
 	margin-right: auto;
 }
 
-.image{
-	width: 100%; 
-	margin-left: auto;
-	margin-right: auto;
+.img-responsive {
+	margin-bottom: 5px; 
 }
-
 /* --- END CONTENT STYLES --- */

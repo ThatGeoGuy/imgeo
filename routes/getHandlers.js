@@ -61,7 +61,8 @@ module.exports = function(app) {
 				"description": "Image result - " + imageString,
 				"authors" : authors, 
 				"imageUrl" : imageString,
-				"pageUrl": app.get('FQDN') + req.originalUrl
+				"pageUrl": app.get('FQDN') + req.originalUrl,
+				"tags": "test,test2,tag test,another tag"
 			}
 			res.render('imageView.html', templateParameters);
 		} else { 
