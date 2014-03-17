@@ -9,9 +9,9 @@
 $(document).ready(function() {
 	var initialize = function() {
 		var mapOptions = {
-		  zoom: 2,
+		  zoom: 1,
 		  mapTypeId: google.maps.MapTypeId.SATELLITE,
-		  center: new google.maps.LatLng(39,-36),
+		  center: new google.maps.LatLng(0,0),
 		  panControl: false,
 		  scaleControl: false,
 		  zoomControl: false
