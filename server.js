@@ -3,7 +3,7 @@
  * File        : server.js
  * Author      : Jeremy Steward
  * Date        : 2014-02-14 @ 11:14:35
- * Description : Implements the webserver for the ENGO500 project website
+ * Description : Implements the webserver for the ENGO551 project website
  */
 var express     = require('express'),
 	getHandlers = require('./routes/getHandlers'),
