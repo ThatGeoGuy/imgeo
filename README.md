@@ -8,13 +8,10 @@ Run Server
 
 This project depends on node.js version 0.10 or greater. I highly recommend using [nvm](https://github.com/creationix/nvm) to manage your node installation if at all possible. To run the server and see the website, simply run the following commands: 
 
-`$ git clone https://github.com/ThatGeoGuy/imgeo.git`
-
-`$ cd imgeo` 
-
-`$ npm install`
-
-`$ node server.js`
+	$ git clone https://github.com/ThatGeoGuy/imgeo.git
+	$ cd imgeo
+	$ npm install
+	$ node server.js
 
 TODO
 ----
@@ -22,7 +19,7 @@ TODO
 * Decide on schema for database
 * Implement database and add database setup files to repo
 * Create `configure` script to setup modules from npm and initialize database
-* Create templates for web pages 
+* Finish templates for web pages (only results page left, need database)
 * Implement search functionality in conjunction with Google Maps API
 * Populate Wiki
 
