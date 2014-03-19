@@ -1,4 +1,27 @@
 {% extends "base.html" %} 
+{% block CSS %} 
+		<link rel='stylesheet' href='/css/index.css'>
+{% endblock %}
+
 {% block CONTENT %}
-<p class='lead'>Click on the map or use the search bar below to explore our imagery!</p>
+{% include "navBar.html" %}
+		<div class='container'>
+			<div id='map-canvas'></div>
+			<form id='search-form' role='search' method='get'>
+				<span class='input-group'>
+					<input id='search-bar-home' name='search' type='search' class='form-control' required placeholder='Search...' />
+					<span class='input-group-btn'>
+						<button type='submit' class='btn btn-primary'>
+							<span class='glyphicon glyphicon-search'></span>
+						</button>
+					</span>
+				</span>
+			</form>
+		</div>
+{% include "footer.html" %}
+{% endblock %}
+
+{% block SCRIPTS %}
+		<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+		<script src='/js/index.js'></script>
 {% endblock %}
