@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block CSS %}
+		<link rel='stylesheet' href='/css/imageView.css'>
+{% endblock %}
+
+{% block CONTENT %}
+{% include "navBar.html" %}
+
+		<div class='container'>
+			<div class='row'>
+				<div class='col-md-1 col-12'></div>
+				<div class='col-md-6 col-12'>
+					<a href='{{imageUrl}}'><img class='img-responsive' src='{{ imageUrl }}' /></a>
+				</div>
+				<div class='col-md-5 col-12' id='map-canvas'></div>
+			</div>
+			<div class='row'>
+				<div class='col-md-1 col-12'></div>
+				<div class='col-md-10 col-12'>
+					<h1>IMAGE NAME</h1>
+					<ul id='social-icon-list'>
+						<li>
+							<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u={{ pageUrl }}'>
+								<img class='social-icon' src='/fb_icon.png' />
+							</a>
+						</li>
+						<li>
+							<a target='_blank' href='http://twitter.com/home?status={{ pageUrl }}'>
+								<img class='social-icon' src='/twitter_icon.png' />
+							</a>
+						</li>
+						<li> 
+							<a target='_blank' href='https://plusone.google.com/_/+1/confirm?hl=en&url={{ pageUrl }}'>
+								<img class='social-icon' src='/gplus_icon.png' />
+							</a>
+						</li>
+					</ul>
+					<p class='tags'>
+						<strong>TAGS:</strong> 
+						{% for tag in tags %}
+						<a class='taglist' href='/?search=${{ tag }}'>${{ tag }}</a>, 
+						{% endfor %}
+					</p>
+				</div>
+				<div class='col-md-1 col-12'></div>
+			</div>
+		</div>
+
+{% endblock %}
+
+{% block SCRIPTS %}
+		<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+		<script type='text/javascript' src='/js/imageView.js'></script>
+{% endblock %}

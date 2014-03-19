@@ -1,11 +1,35 @@
+/* --- NAVBAR STYLES --- */
 /* Fixes a webkit bug, see: https://github.com/twbs/bootstrap/issues/9950 */
-.input-group { 
+.navbar > .input-group { 
 	width: 250px; 
 }
 
-#search-input { 
+.navbar > #search-input { 
 	width: 250px;
 }
+
+.navbar-static-top { 
+	margin-bottom: 19px;
+}
+
+/* --- CONTENT STYLES --- */
+body { 
+	background-color: #f0fff0;
+}
+body > .container { 
+	display: inline-block;
+	position: relative;
+	width: 100%;
+}
+
+body > .container > #dummy { 
+	padding-top: 75%; 
+}
+
+code { 
+	font-size: 80%;
+}
+/* --- END CONTENT STYLES --- */ 
 
 /* --- FOOTER STYLES --- */
 html { 
@@ -25,10 +49,6 @@ body {
 	background-color: #383838;
 }
 
-body > .container { 
-	padding: 60px 15px 0;
-}
-
 .container .text-muted { 
 	margin: 20px 0;
 }
@@ -36,9 +56,5 @@ body > .container {
 #footer > .container { 
 	padding-right: 15px;
 	padding-left: 15px;
-}
-
-code { 
-	font-size: 80%;
 }
 /* --- END FOOTER STYLES --- */
