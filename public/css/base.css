@@ -13,6 +13,9 @@
 }
 
 /* --- CONTENT STYLES --- */
+body { 
+	background-color: #f0fff0;
+}
 body > .container { 
 	display: inline-block;
 	position: relative;

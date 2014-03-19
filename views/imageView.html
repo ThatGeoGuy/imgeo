@@ -17,12 +17,30 @@
 			<div class='row'>
 				<div class='col-md-1 col-12'></div>
 				<div class='col-md-10 col-12'>
-					<span>
 					<h1>IMAGE NAME</h1>
-					<a href='http://www.facebook.com/sharer/sharer.php?u={{ pageUrl }}'>
-						TEST TEXT
-					</a>
-					<p class='tags'><strong>TAGS:</strong> {{ tags }}</p>
+					<ul id='social-icon-list'>
+						<li>
+							<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u={{ pageUrl }}'>
+								<img class='social-icon' src='/fb_icon.png' />
+							</a>
+						</li>
+						<li>
+							<a target='_blank' href='http://twitter.com/home?status={{ pageUrl }}'>
+								<img class='social-icon' src='/twitter_icon.png' />
+							</a>
+						</li>
+						<li> 
+							<a target='_blank' href='https://plusone.google.com/_/+1/confirm?hl=en&url={{ pageUrl }}'>
+								<img class='social-icon' src='/gplus_icon.png' />
+							</a>
+						</li>
+					</ul>
+					<p class='tags'>
+						<strong>TAGS:</strong> 
+						{% for tag in tags %}
+						<a class='taglist' href='/?search=${{ tag }}'>${{ tag }}</a>, 
+						{% endfor %}
+					</p>
 				</div>
 				<div class='col-md-1 col-12'></div>
 			</div>
