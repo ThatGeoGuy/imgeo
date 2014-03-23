@@ -1,1 +1,1 @@
-psql -U postgres -a -f models/init.sql
+psql -U postgres -d imgeo_website -a -f models/init.sql

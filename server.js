@@ -9,7 +9,8 @@ var express     = require('express'),
 	getHandlers = require('./routes/getHandlers'),
 	nunjucks    = require('nunjucks'),
 	http        = require('http'),
-	path        = require('path');
+	path        = require('path'),
+	pg          = require('pg');
 
 var app = express();
 app.set('port', process.env.PORT || 8000);
@@ -42,7 +43,7 @@ if(app.get('env') === 'development') {
 /*
  * Define GET routes and handlers for application
  */
-getHandlers(app); 
+getHandlers(app, pg); 
 
 /*
  * Define POST routes and handlers for application
