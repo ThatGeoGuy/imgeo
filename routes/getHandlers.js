@@ -14,7 +14,7 @@ var authors = [
 	{ "name": "Laura Norman" }
 ];
 
-imageExtensions = [
+var imageExtensions = [
 	".jpg",
 	".jpeg",
 	".png",
@@ -23,7 +23,7 @@ imageExtensions = [
 	".tiff"
 ];
 
-module.exports = function(app) { 
+module.exports = function(app, pg) { 
 	app.get('/', function(req, res) {
 		templateParameters = {
 			"description" : "Homepage for the IMGEO website",

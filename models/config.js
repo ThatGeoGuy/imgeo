@@ -9,26 +9,24 @@
 
 module.exports = { 
 	development: {
-		db:          "imgeo_website",
-		port:        5432,
-		user:        "postgres",
-		pass:        "postgres",
-		type:        "postgres",
-		uri:         "localhost",
-		connString:  "postgres://postgres:postgres@localhost:5432/imgeo_website",
-		app: { 
+		database:  "imgeo_website",
+		port:      5432,
+		user:      "postgres",
+		password:  "postgres",
+		host:      "localhost",
+		//connString:  "postgres://postgres:postgres@localhost:5432/imgeo_website",
+		app: {
 			name: "IMGEO - Spatially aware image sharer"
 		}
 	}, 
 
 	production: {
-		db:          "imgeo_website",
-		port:        process.env.PG_PORT || 5432,
-		user:        process.env.PG_IMGEO_USER,
-		pass:        process.env.PG_IMGEO_PASS,
-		type:        "postgres",
-		uri:         process.env.PG_URI,
-		connString:  process.env.PG_IMGEO_CONNSTRING,
+		database:  "imgeo_website",
+		port:      process.env.PG_PORT || 5432,
+		user:      process.env.USER,
+		password:  process.env.PG_PASS,
+		host:      process.env.PG_HOST,
+		//connString:  process.env.PG_IMGEO_CONNSTRING,
 		app: { 
 			name: "IMGEO - Spatially aware image sharer"
 		}
