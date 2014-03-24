@@ -6,8 +6,9 @@
  * Description : Implements the request handlers for each page on the server
  */
 
-var url = require("url"),
-	fs  = require("fs");
+var url  = require("url"),
+	fs   = require("fs"),
+	path = require("path");
 
 var authors = [ 
 	{ "name": "Jeremy Steward" },
@@ -25,12 +26,21 @@ var imageExtensions = [
 
 module.exports = function(app, pg) { 
 	app.get('/', function(req, res) {
-		templateParameters = {
-			"description" : "Homepage for the IMGEO website",
-			"authors"     : authors,
-			"index"       : true,
-		};
-		res.render('index.html', templateParameters);
+		var url_parts = url.parse(request.url, true);
+		var query = url_parts.query; 
+		var templateParameters; 
+
+		if(query === "") { 
+			templateParameters = {
+				"description" : "Homepage for the IMGEO website",
+				"authors"     : authors,
+				"index"       : true,
+			};
+			res.render('index.html', templateParameters);
+		} else { 
+			templateParameters = {};
+			res.render('results.html', templateParameters);
+		}
 	}); 
 
 	app.get('/upload', function(req, res) { 
@@ -56,9 +66,9 @@ module.exports = function(app, pg) {
 			}
 		}
 
-		if(imageString && fs.existsSync("public" + imageString)) { 
+		if(imageString && fs.existsSync(path.join("public", imageString))) { 
 			templateParameters = { 
-				"description": "Image result - " + imageString,
+				"description": "Image - " + imageString,
 				"authors" : authors, 
 				"imageUrl" : imageString,
 				"pageUrl": app.get('FQDN') + req.originalUrl,
