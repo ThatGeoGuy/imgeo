@@ -7,8 +7,8 @@
  * 				 strings. (uses prepared queries in node-postgres) 
  */
 
-var fs = require('fs'), 
-	path = require('path'); 
+var fs   = require('fs'),
+	path = require('path');
 
 module.exports = { 
 
@@ -61,7 +61,7 @@ module.exports = {
 		var preparedStatement = { 
 			"name": "findImagesByTag", 
 			"text": queryString,
-			"values": [ tag ] 
+			"values": [ tags ] 
 		};
 		return preparedStatement;
 	}
