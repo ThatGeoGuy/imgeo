@@ -10,59 +10,47 @@
 var fs   = require('fs'),
 	path = require('path');
 
-module.exports = { 
+module.exports = {};
 
-	/*
-	 * A function to return a prepared statement for selecting all points
-	 * within a radius from a supplied point
-	 */
-	findImagesInArea : function(latLng, radius) { 
-		/* 
-		 * The actual query is written in a .sql file in the 
-		 * models/queries/ folder
-		 */
-		var queryString;
-		fs.readFileSync(path.join(__dirname, 'queries/findImagesInArea.sql'), function(err, data) { 
-			if(err) { 
-				throw err; 
-			} 
-			queryString = data.toString();
-		}); 
-
-		var preparedStatement = { 
-			"name": "findImagesInArea",
-			"text": queryString,
-			"values": [
-				latLng.longitude,
-				latLng.latitude,
-				radius
-			]
-		}; 	
-		return preparedStatement;
-	}, 
-
-	/*
-	 * A function to return a prepared statement for selecting all images 
-	 * that have been tagged with a specific tag
-	 */ 
-	findImagesByTag : function(tags) { 
-		/*
-		 * Actual query is written in a .sql file in the 
-		 * models/queries/ folder
-		 */
-		var queryString; 
-		fs.readFileSync(path.join(__dirname, 'queries/findImagesByTag.sql'), function(err, data) { 
-			if(err) { 
-				throw err;
-			} 
-			queryString = data.toString(); 
-		});
-
-		var preparedStatement = { 
-			"name": "findImagesByTag", 
-			"text": queryString,
-			"values": [ tags ] 
-		};
-		return preparedStatement;
-	}
+var loadQuery = function(filepath) { 
+	var query; 
+	fs.readFileSync(path.join(__dirname, filepath), function(err, data) { 
+		if(err) { 
+			throw err;
+		}
+		query = data.toString();
+	});
+	return query; 
 };
+
+/*
+ * For each file in the queries directory, make a preparedStatement with
+ * the same name as the file name (minus the .sql part) and return that 
+ * statement. These are all put into the module.exports object, which 
+ * will have a function name that is the same as the name of each of the
+ * prepared statments. 
+ */
+fs.readDir(path.join(__dirname, "queries"), function(err, files) { 
+	if(err) { 
+		throw err;
+	}
+	
+	for(var i = 0; i < files.length; ++i) { 
+		/*
+		 * NOTE: below each function will accept an argument 'values', 
+		 * which is an array of each of the values that need to be 
+		 * substituted into the prepared statements when they are 
+		 * constructed.
+		 */
+		module.exports[files[i].substring(0,files[i].length - 4)] = function(values) {
+			var queryString = loadQuery(path.join(__dirname, 'queries', files[i]));
+			var preparedStatement = { 
+				"name": files[i].substring(0,files[i].length - 4),
+				"text": queryString,
+				"values": values
+			};
+			return preparedStatement; 
+		};
+	}
+});
+
