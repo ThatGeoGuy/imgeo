@@ -10,17 +10,16 @@ This project depends on node.js version 0.10 or greater. I highly recommend usin
 
 	$ git clone https://github.com/ThatGeoGuy/imgeo.git
 	$ cd imgeo
-	$ npm install
+	$ ./configure
 	$ node server.js
 
 TODO
 ----
 
-* Decide on schema for database
-* Implement database and add database setup files to repo
-* Create `configure` script to setup modules from npm and initialize database
-* Finish templates for web pages (only results page left, need database)
+* Finish templates for web pages (only results page left)
 * Implement search functionality in conjunction with Google Maps API
+* Implement HTTP POST handlers for uploading imagery
+* Populate database with imagery, locations, and tags
 * Populate Wiki
 
 License 
