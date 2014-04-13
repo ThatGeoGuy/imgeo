@@ -9,13 +9,14 @@
 			<div class='row'>
 				<div class='col-md-1 col-12'></div>
 				<div class='col-md-5 col-12'>
-					<form role='form'>
+					<form role='form' enctype='multipart/form-data' method='POST'>
 						<ul>
 							<li><label for='imgname'>Image Name</label></li>
 							<li>
 								<input 
 								id='imgname' 
-								type='name' 
+								type='text' 
+								name='imgname' 
 								class='form-control' 
 								placeholder='Enter name'>
 							</li>
@@ -24,24 +25,34 @@
 								<input 
 								id='location' 
 								type='text' 
+								name='location'
 								class='form-control' 
 								placeholder='Enter a location or click on the map to specify your location here!'>
-							</li>
-							<li>
-								<label>
-									<input type='checkbox'> Use Current Location
-								</label>
 							</li>
 							<li><label for='image'>Select an Image</label></li>
 							<li>
 								<div class='input-group'>
 									<span class='input-group-btn'>
 										<span class='btn btn-default btn-file'>
-											Browse <input id='image' type='file' class='form-control' accept='image/*'>
+											Browse 
+											<input 
+											id='image' 
+											type='file' 
+											name='image' 
+											class='form-control' >
 										</span>
 									</span>
 									<input type='text' name='filename' class='form-control' readonly>
 								</div>
+							</li>
+							<li><label for='tags'>Tags:</label></li>
+							<li>
+								<input 
+								id='tags'
+								type='text'
+								name='tags'
+								class='form-control'
+								placeholder='Enter tags separated by commas'>
 							</li>
 							<li><button type='submit' class='btn btn-primary'>Submit</button></li>
 						</ul>

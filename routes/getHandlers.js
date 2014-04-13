@@ -1,9 +1,9 @@
 /* 
  * ENGO 551 - IMGEO Project
- * File        : routes/handlers.js
+ * File        : routes/getHandlers.js
  * Author      : Jeremy Steward
  * Date        : 2014-02-14 @ 14:00:24
- * Description : Implements the request handlers for each page on the server
+ * Description : Implements the HTTP GET handlers for each page on the server
  */
 
 var url  = require("url"),
@@ -26,11 +26,11 @@ var imageExtensions = [
 
 module.exports = function(app, pg) { 
 	app.get('/', function(req, res) {
-		var url_parts = url.parse(request.url, true);
+		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query; 
 		var templateParameters; 
 
-		if(query === "") { 
+		if(!query.hasOwnProperty('search')) { 
 			templateParameters = {
 				"description" : "Homepage for the IMGEO website",
 				"authors"     : authors,
@@ -53,20 +53,22 @@ module.exports = function(app, pg) {
 	});
 
 	app.get('/image/*', function(req, res) {
-		var path = url.parse(req.url).pathname; 
-		path = path.split('/').filter(function(e) { 
+		var filepath = url.parse(req.url).pathname; 
+		filepath = filepath.split('/').filter(function(e) { 
 			return e.length > 0; 
 		});
-		path.slice(1);
+		filepath.slice(1);
 
 		var imageString = false; 
 		for(var i = 0; i < imageExtensions.length; ++i) {
-			if(path[1].slice(path[1].length - 4) === imageExtensions[i]) {
-				imageString = "/img/" + path[1]; 
+			if(filepath[1].slice(filepath[1].length - 4) === imageExtensions[i]) {
+				imageString = "/img/" + filepath[1]; 
 			}
 		}
 
-		if(imageString && fs.existsSync(path.join("public", imageString))) { 
+		var imagePath = path.join(__dirname, "../public", imageString); 
+
+		if(fs.existsSync(imagePath)) { 
 			templateParameters = { 
 				"description": "Image - " + imageString,
 				"authors" : authors, 
