@@ -38,7 +38,6 @@ fs.readdir(directory, function(err, files) {
 		 * substituted into the prepared statements when they are 
 		 * constructed.
 		 */
-
 		var currentFile = array[i]; 
 		var name = currentFile.substring(0,currentFile.length - 4); 
 		module.exports[name] = function(values) { 
@@ -51,26 +50,5 @@ fs.readdir(directory, function(err, files) {
 			return parameterizedQuery; 
 		}
 	});
-
-	/*
-	for(var i = 0; i < files.length; ++i) { 
-		/*
-		 * NOTE: below each function will accept an argument 'values', 
-		 * which is an array of each of the values that need to be 
-		 * substituted into the prepared statements when they are 
-		 * constructed.
-		var currentFile = files[i].toString(); 
-		var name = currentFile.substring(0,currentFile.length - 4);
-		module.exports[name] = function(values) {
-			var pathname = path.join(directory, currentFile); 
-			var queryString = loadQuery(pathname);
-			var parameterizedQuery = { 
-				"text": queryString,
-				"values": values
-			};
-			return parameterizedQuery; 
-		};
-	};
-	*/
 });
 
