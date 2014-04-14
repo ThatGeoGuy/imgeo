@@ -9,4 +9,4 @@ imgeo.image_location
 WHERE 
 imgeo.image_location.image_id = imgeo.images.id AND 
 imgeo.image_location.location_id = imgeo.locations.id AND 
-ST_DWithin(imgeo.locations.lon_lat_point, ST_GeographyFromText('SRID=4326;POINT($1 $2)'),$3);
+ST_DWithin(imgeo.locations.lon_lat_point, ST_GeographyFromText($1), $2);

@@ -5,12 +5,13 @@
  * Date        : 2014-02-14 @ 11:14:35
  * Description : Implements the webserver for the ENGO551 project website
  */
-var express     = require('express'),
-	getHandlers = require('./routes/getHandlers'),
-	nunjucks    = require('nunjucks'),
-	http        = require('http'),
-	path        = require('path'),
-	pg          = require('pg');
+var express      = require('express'),
+	getHandlers  = require('./routes/getHandlers'),
+	postHandlers = require('./routes/postHandlers'),
+	nunjucks     = require('nunjucks'),
+	http         = require('http'),
+	path         = require('path'),
+	pg           = require('pg');
 
 var app = express();
 app.set('port', process.env.PORT || 8000);
@@ -48,6 +49,7 @@ getHandlers(app, pg);
 /*
  * Define POST routes and handlers for application
  */
+postHandlers(app, pg); 
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){

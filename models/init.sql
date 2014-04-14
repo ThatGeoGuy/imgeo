@@ -1,11 +1,12 @@
 -- ENGO 551 IMGEO Database Initialization Script -- 
--- Initialize Database --
-DROP DATABASE IF EXISTS imgeo_website; 
-CREATE DATABASE imgeo_website; 
-GRANT ALL PRIVILEGES ON DATABASE imgeo_website TO postgres;
+-- Initialize Database, use these lines if it doesn't exist --
+-- CREATE DATABASE imgeo_website; 
+-- GRANT ALL PRIVILEGES ON DATABASE imgeo_website TO postgres;
+
 -- Initialize Schema --
 DROP SCHEMA IF EXISTS imgeo CASCADE;
 CREATE SCHEMA imgeo;
+
 -- Add extensions --
 DROP EXTENSION IF EXISTS postgis;
 CREATE EXTENSION postgis;
