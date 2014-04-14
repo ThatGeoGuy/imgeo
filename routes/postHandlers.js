@@ -32,7 +32,6 @@ module.exports = function(app, pg) {
 					MD5      = crypto.createHash('md5')
 									 .update(name + ' ' + loc)
 									 .digest('hex'); 
-					console.log(MD5);
 					
 					if(result.rows.length === 0) { 
 

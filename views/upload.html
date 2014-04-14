@@ -9,7 +9,7 @@
 			<div class='row'>
 				<div class='col-md-1 col-12'></div>
 				<div class='col-md-5 col-12'>
-					<form role='form' enctype='multipart/form-data' method='POST'>
+					<form id='upload-form' role='form' enctype='multipart/form-data' method='POST'>
 						<ul>
 							<li><label for='imgname'>Image Name</label></li>
 							<li>
@@ -18,7 +18,8 @@
 								type='text' 
 								name='imgname' 
 								class='form-control' 
-								placeholder='Enter name'>
+								placeholder='Enter name'
+								required autofocus >
 							</li>
 							<li><label for='location'>Location</label></li>
 							<li>
@@ -27,7 +28,8 @@
 								type='text' 
 								name='location'
 								class='form-control' 
-								placeholder='Enter a location or click on the map to specify your location here!'>
+								placeholder='Enter a longitude, latitude or click on the map!'
+								required >
 							</li>
 							<li><label for='image'>Select an Image</label></li>
 							<li>
@@ -39,7 +41,8 @@
 											id='image' 
 											type='file' 
 											name='image' 
-											class='form-control' >
+											class='form-control' 
+											required > 
 										</span>
 									</span>
 									<input type='text' name='filename' class='form-control' readonly>
