@@ -3,6 +3,20 @@
 {% endblock %}
 
 {% block CONTENT %}
+{% include "navBar.html" %}
+		<div class='container'>
+			<div class='row'>
+			{% for image in imageList %}
+				<div class='col-sm-3'> 
+					<a href='/image/{{image}}'><img src='/img/{{image}}' width='100%'></a>
+				</div>
+			{% endfor %}
+			</div>
+			{% if not imageList %}
+			<p>Sorry, no images could be found :(</p>
+			{% endif %}
+		</div>
+{% include "footer.html" %}
 {% endblock %}
 
 {% block SCRIPTS %}

@@ -6,9 +6,12 @@
  * Description : Implements the HTTP GET handlers for each page on the server
  */
 
-var url  = require("url"),
-	fs   = require("fs"),
-	path = require("path");
+var url          = require("url"),
+	fs           = require("fs"),
+	modelConfig  = require('../models/config'),
+	modelQueries = require('../models/query'),
+	path         = require("path");
+
 
 var authors = [ 
 	{ "name": "Jeremy Steward" },
@@ -38,8 +41,49 @@ module.exports = function(app, pg) {
 			};
 			res.render('index.html', templateParameters);
 		} else { 
-			templateParameters = {};
-			res.render('results.html', templateParameters);
+			qArray = query.search.split('$'); 
+			if(qArray[0].match(new RegExp(/(-?\d+\.?\d+) (-?\d+\.?\d+)/))) { 
+				pg.connect(modelConfig[app.get('env')], function(err, client, done) {
+					var loc = 'SRID=4326;POINT(' +  qArray[0] + ')';
+					client.query(modelQueries.selectImagesInArea([loc, 20000]), function(err, result) {
+						var imagePaths = [];
+						for(var i = 0; i < result.rows.length; ++i) { 
+							imagePaths[i] = result.rows[i].filepath; 
+						} 
+
+						if(imagePaths.length === 0) { 
+							imagePaths = false; 
+						}
+
+						templateParameters = {
+							'authors': authors,
+							'imageList': imagePaths
+						};
+						res.render('results.html', templateParameters);
+						done(); 
+					});
+				});
+			} else { 
+				var imagePaths = [];
+				pg.connect(modelConfig[app.get('env')], function(err, client, done) { 
+					qArray.forEach(function(el, i, array) { 
+						client.query(modelQueries.selectImagesByTag([array[i]]), function(err, result) { 
+							for(var j = 0; j < result.rows.length; ++j) { 
+								imagePaths.push(result.rows[j].filepath); 
+							} 
+						});
+					});
+
+					setTimeout(function() { 
+						templateParameters = { 
+							'authors': authors,
+							'imageList': imagePaths
+						}
+						res.render('results.html', templateParameters); 
+						done();
+					}, 500); 
+				}); 
+			}
 		}
 	}); 
 
@@ -69,14 +113,46 @@ module.exports = function(app, pg) {
 		var imagePath = path.join(__dirname, "../public", imageString); 
 
 		if(fs.existsSync(imagePath)) { 
-			templateParameters = { 
-				"description": "Image - " + imageString,
-				"authors" : authors, 
-				"imageUrl" : imageString,
-				"pageUrl": app.get('FQDN') + req.originalUrl,
-				"tags": ["test", "test2", "tag", "test", "another tag"]
-			}
-			res.render('imageView.html', templateParameters);
+			pg.connect(modelConfig[app.get('env')], function(err, client, done) { 
+				var tags = []; 
+				client.query(modelQueries.selectTagsForImage([filepath[1]]), function(err, result) { 
+					if(err) { done(err); } 
+					for(var i = 0; i < result.rows.length; ++i) { 
+						tags[i] = result.rows[i].name; 
+					}
+					var title; 
+					client.query(modelQueries.selectImageName([filepath[1]]), function(err, result) { 
+						if(err) { done(err); } 
+						if(result.rows.length > 0) { 
+							title = result.rows[0].name; 
+						} else { 
+							title = filepath[1]; 
+						}
+							
+						var lat, lon; 
+						client.query(modelQueries.selectLocationFromImage([filepath[1]]), function(err, result) { 
+							if(err) { done(err); } 
+							if(result.rows.length > 0) { 
+								lon = result.rows[0].lon_lat[0]; 
+								lat = result.rows[0].lon_lat[1]; 
+							}
+							
+							var templateParameters = { 
+								"title": title, 
+								"description": "Image - " + imageString,
+								"authors" : authors, 
+								"imageUrl" : imageString,
+								"pageUrl": app.get('FQDN') + req.originalUrl,
+								"tags": tags,
+								"latitude": lat,
+								"longitude": lon
+							}
+							res.render('imageView.html', templateParameters);
+							done(); 
+						});
+					}); 
+				});
+			});
 		} else { 
 			res.send(404);
 		}
