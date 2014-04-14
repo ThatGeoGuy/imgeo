@@ -47,7 +47,7 @@ $(document).ready(function() {
 	var initialize = function() {
 		var mapOptions = {
 		  zoom: 1,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  mapTypeId: google.maps.MapTypeId.TERRAIN,
 		  center: new google.maps.LatLng(0,0),
 		  panControl: false,
 		  scaleControl: false,

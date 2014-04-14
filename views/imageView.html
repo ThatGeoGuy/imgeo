@@ -17,7 +17,7 @@
 			<div class='row'>
 				<div class='col-md-1 col-12'></div>
 				<div class='col-md-10 col-12'>
-					<h1>IMAGE NAME</h1>
+					<h1>{{ title }}</h1>
 					<ul id='social-icon-list'>
 						<li>
 							<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u={{ pageUrl }}'>
@@ -50,5 +50,32 @@
 
 {% block SCRIPTS %}
 		<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
-		<script type='text/javascript' src='/js/imageView.js'></script>
+		<script type='text/javascript'> 
+			$(document).ready(function() {
+				var lat = {{ latitude }}; 
+				var lon = {{ longitude }};
+				var title = "{{ title }}";
+
+				var map, marker;
+				var initialize = function() {
+					var mapOptions = {
+					  zoom: 9,
+					  mapTypeId: google.maps.MapTypeId.TERRAIN,
+					  center: new google.maps.LatLng(lat, lon),
+					  panControl: false,
+					  scaleControl: false,
+					  zoomControl: false,
+					  mapTypeControl: false,
+					  streetViewControl: false
+					};		
+					map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+					marker = new google.maps.Marker({ 
+						'position': new google.maps.LatLng(lat, lon), 
+						'map': map,
+						'title': title,
+					}); 
+				}
+				initialize();
+			});
+		</script>
 {% endblock %}

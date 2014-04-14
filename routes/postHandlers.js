@@ -26,7 +26,7 @@ module.exports = function(app, pg) {
 				form.parse(req, function(err, fields, files) { 
 					name     = fields.imgname;
 					loc      = 'SRID=4326;POINT(' + fields.location + ')';
-					tags     = fields.tags.split(', ');
+					tags     = fields.tags.split(',');
 					filename = fields.filename;
 					filetype = fields.filename.substring(filename.length-4,filename.length);
 					MD5      = crypto.createHash('md5')
