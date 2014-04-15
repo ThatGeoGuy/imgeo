@@ -16,10 +16,6 @@ This project depends on node.js version 0.10 or greater. I highly recommend usin
 TODO
 ----
 
-* Finish templates for web pages (only results page left)
-* Implement search functionality in conjunction with Google Maps API
-* Implement HTTP POST handlers for uploading imagery
-* Populate database with imagery, locations, and tags
 * Populate Wiki
 
 License 
