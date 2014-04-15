@@ -1,2 +1,3 @@
 npm install
+mkdir public/img/
 psql -U postgres -d imgeo_website -a -f models/init.sql
